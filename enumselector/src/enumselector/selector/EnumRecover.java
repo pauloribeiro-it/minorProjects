@@ -5,9 +5,9 @@ import java.lang.reflect.Method;
 
 import enumselector.annotations.AttributeSelector;
 
-public class EnumRecover {
+public class EnumRecover<T extends Enum<?>>  {
 
-	public <T extends EnumSelector> T recoverEnum(Class<T> t, String attributeName, Object value)
+	public T recoverEnum(Class<T> t, String attributeName, Object value)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
 		Method method = getMethod(t, attributeName);
 		if (method != null) {
@@ -21,7 +21,7 @@ public class EnumRecover {
 		throw new NoSuchMethodException("Method not found!");
 	}
 
-	private <T extends EnumSelector> Method getMethod(Class<T> s, String attributeName) {
+	private Method getMethod(Class<T> s, String attributeName) {
 		for (Method m : s.getDeclaredMethods()) {
 			if (m.isAnnotationPresent(AttributeSelector.class)) {
 				StringBuilder methodName = new StringBuilder();
@@ -36,7 +36,7 @@ public class EnumRecover {
 		return null;
 	}
 
-	private <T extends EnumSelector> T findByMethod(Class<T> c, Method m, Object value)
+	private T findByMethod(Class<T> c, Method m, Object value)
 			throws IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		for (T e : c.getEnumConstants()) {
 			Object obj = m.invoke(e);
@@ -47,7 +47,7 @@ public class EnumRecover {
 		return null;
 	}
 
-	private <T extends EnumSelector> Method findMethodByAnnotation(Class<T> c, String attribute) {
+	private Method findMethodByAnnotation(Class<T> c, String attribute) {
 		for (Method m : c.getDeclaredMethods()) {
 			if (m.isAnnotationPresent(AttributeSelector.class)) {
 				AttributeSelector annotation = m.getDeclaredAnnotation(AttributeSelector.class);

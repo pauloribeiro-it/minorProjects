@@ -7,6 +7,6 @@ import enumselector.selector.EnumRecover;
 
 public class Main {
 	public static void main(String[] args) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException {
-		System.out.println(new EnumRecover().recoverEnum(AnimalEnum.class, "desc","Dog"));
+		System.out.println(new EnumRecover<AnimalEnum>().recoverEnum(AnimalEnum.class, "desc","Dog"));
 	}
 }

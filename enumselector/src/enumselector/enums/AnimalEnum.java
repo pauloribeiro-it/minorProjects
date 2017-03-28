@@ -1,9 +1,8 @@
 package enumselector.enums;
 
 import enumselector.annotations.AttributeSelector;
-import enumselector.selector.EnumSelector;
 
-public enum AnimalEnum implements EnumSelector{
+public enum AnimalEnum {
 	DOG("Dog",1),
 	CAT("Cat",2),
 	SNAKE("Snake",3);
